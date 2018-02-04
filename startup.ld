@@ -10,6 +10,7 @@ SECTIONS
     }
     .data : {
     	*(.data)
+    	*(.rodata)
     }
     .bss : { *(.bss COMMON) }
     . = ALIGN(8);

@@ -51,7 +51,6 @@ setup_toolchain:
 
 ###############################################################################
 # Building
-# $(xcc)gcc -c -mcpu=$(cpu_model) -s -g hello.c -o hello.o
 #
 # .S extension for hand-written files, will be run through preprocessor
 ###############################################################################
@@ -66,8 +65,11 @@ link_objects: hello.o startup.o
 	@$(xcc)objcopy -O binary hello.elf $(bin_img)
 
 clean:
-	rm -f hello.o startup.o hello.elf
+	rm -f hello.o startup.o hello.elf old_hello.s
 
+gasonly:
+	@$(xcc)gcc -S -mcpu=$(cpu_model)  \
+		-o example.s example.c
 ###############################################################################
 # RUN
 ###############################################################################
