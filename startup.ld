@@ -1,8 +1,9 @@
-ENTRY(_Reset)
+/* With QEMU this is not needed */
+/* ENTRY(_Reset) */
 SECTIONS
 {
-    /* this is from virt.c */
-    . = 0x40000000;
+    /* QEMU bootloader will put it on 0x40080000 anyway */
+    . = 0x0;
     /* put INTERRUPT_VECTOR and then rest of the code */
     .text : {
         startup.o (INTERRUPT_VECTOR)

@@ -67,7 +67,7 @@ link_objects: hello.o startup.o
 clean:
 	rm -f hello.o startup.o hello.elf old_hello.s
 
-gasonly:
+example:
 	@$(xcc)gcc -S -mcpu=$(cpu_model)  \
 		-o example.s example.c
 ###############################################################################

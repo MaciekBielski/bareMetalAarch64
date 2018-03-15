@@ -1,14 +1,13 @@
 	.arch armv8-a+crc
 	.file	"example.c"
 	.global	UART0DR
-	.data
+	.section	.rodata
 	.align	3
 	.type	UART0DR, %object
 	.size	UART0DR, 8
 UART0DR:
 	.xword	150994944
 	.global	txt
-	.section	.rodata
 	.align	3
 .LC0:
 	.string	"Hello world\n"
@@ -28,19 +27,15 @@ txt:
 	.xword	.LC2
 	.text
 	.align	2
-	.global	print_uart0
 	.type	print_uart0, %function
 print_uart0:
 	sub	sp, sp, #16
 	str	x0, [sp, 8]
 	b	.L2
 .L3:
-	adrp	x0, UART0DR
-	add	x0, x0, :lo12:UART0DR
-	ldr	x0, [x0]
+	mov	x0, 150994944
 	ldr	x1, [sp, 8]
 	ldrb	w1, [x1]
-	and	w1, w1, 255
 	str	w1, [x0]
 	ldr	x0, [sp, 8]
 	add	x0, x0, 1
@@ -48,7 +43,6 @@ print_uart0:
 .L2:
 	ldr	x0, [sp, 8]
 	ldrb	w0, [x0]
-	and	w0, w0, 255
 	cmp	w0, 0
 	bne	.L3
 	nop

@@ -1,10 +1,10 @@
 
-volatile unsigned int * UART0DR = (unsigned int *)0x09000000;
-volatile char *txt[] = {
+volatile unsigned int * const UART0DR = (unsigned int *)0x09000000;
+const char *txt[] = {
 	"Hello world\n", "Foo bar\n", "Goodbye\n"
 };
 
-void print_uart0(const volatile char *s)
+static void print_uart0(const char *s)
 {
     for(; *s!='\0'; s++)
         *UART0DR = (unsigned int)(*s); /* Transmit char */
@@ -12,7 +12,7 @@ void print_uart0(const volatile char *s)
 
 static int trampoline(short a)
 {
-	volatile char *banner;
+	const char *banner;
 
 	switch(a) {
 		case 4:
