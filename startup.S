@@ -16,9 +16,6 @@ _Reset:
 
 	.text
 ResetHandler:
-	/* stack_top will be defined during linking */
-	ldr	x30, =stack_top
-	mov	sp, x30
 	/* branch and save the return address in link register */
 	bl	_entry
 	b	.
